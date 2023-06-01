@@ -9,18 +9,15 @@ item.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    picture: {
+    goal: {
         type:DataTypes.STRING,
         allowNull: true,
-    }
+    },
     },
 
 {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'item',
+    
   }
 );
 

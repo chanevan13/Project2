@@ -1,12 +1,13 @@
 const form1 = document.querySelector("#login-form");
+const signupBtn = document.querySelector("#signup")
 const userType1 = document.querySelector("#user-type");
-
+console.log("login js")
 const login = async (e) => {
+  console.log("hit login script")
   // check if farmer or customer
   e.preventDefault();
   // farmer login
-  if (userType.checked) {
-    const response = await fetch("/api/farmers/login", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,39 +21,24 @@ const login = async (e) => {
       alert("wrong credentials buddy")
     }
   // customer login
-  } else {
-    const response = await fetch("/api/customers/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: document.querySelector("#username-input").value,
-        password: document.querySelector("#password-input").value,
-      }),
-    });
-    if (response.status === 200) {
-      window.location.assign("/dashboard")
-    } else {
-      alert("wrong credentials buddy")
-    }
-  }
 };
 
+const form = document.querySelector("#login-form");
 form.addEventListener("submit", login);
 
-const form = document.querySelector("#login-form");
-const userType = document.querySelector("#user-type");
+//const userType = document.querySelector("#user-type");
 
 const signup = async (e) => {
   // check if farmer or customer
-  e.preventDefault();
+  event.preventDefault();
+  console.log("test")
   // farmer signup
-  if (userType.checked) {
-    const response = await fetch("/api/farmers", {
+    const response = await fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: document.querySelector("#username-input").value,
-        password: document.querySelector("#password-input").value,
+        username: document.querySelector("#username-signup").value,
+        password: document.querySelector("#password-signup").value,
       }),
     });
     if (response.status === 200) {
@@ -61,21 +47,6 @@ const signup = async (e) => {
       alert("wrong credentials buddy")
     }
   // customer signup
-  } else {
-    const response = await fetch("/api/customers", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: document.querySelector("#username-input").value,
-        password: document.querySelector("#password-input").value,
-      }),
-    });
-    if (response.status === 200) {
-      window.location.assign("/dashboard")
-    } else {
-      alert("wrong credentials buddy")
-    }
-  }
 };
 
-form.addEventListener("submit", signup);
+signupBtn.addEventListener("click", signup);
