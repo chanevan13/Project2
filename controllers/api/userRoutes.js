@@ -17,6 +17,8 @@ router.get("/", async (req, res) => {
 // New User Sign Up
 router.post("/", async (req, res) => {
   try {
+    console.log("inside post route")
+    console.log(req.body);
     const newUser = await User.create(req.body);
     req.session.userId = newUser.id
     req.session.username = newUser.username
@@ -35,7 +37,7 @@ router.post("/login", async (req,res) => {
       where: {username: req.body.username}
     })
     if (!foundUser) {
-      console.log("!")
+      console.log("user failed")
       res.status(403).json({msg: "no user with that id" })
       // if found, check password
     } else {
@@ -45,6 +47,7 @@ router.post("/login", async (req,res) => {
         req.session.username = foundUser.username
         res.status(200).json(foundUser)
       } else {
+        console.log("password failed")
         res.status(403).json({msg: "wrong password buddy"})
       }
     }

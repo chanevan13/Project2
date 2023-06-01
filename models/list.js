@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class list extends Model {}
+class list extends Model { }
 
 list.init(
   {
@@ -9,15 +9,18 @@ list.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    },
+    description:{
+      type:DataTypes.STRING,
+      allowNull:false,
+      maxlength:280,
+    }
 
-{
+  },
+
+  {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'list',
+    
   }
 );
 
-    module.exports = list;
+module.exports = list;

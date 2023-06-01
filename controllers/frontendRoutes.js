@@ -6,7 +6,7 @@ router.get("/", async (req,res) => {
     const listData = await List.findAll()
     const lists = listData.map((list) => list.get({ plain: true }));
     console.log(lists)
-    res.render('all', { lists: lists })
+    res.render('homepage', { lists: lists })
   } catch (error) {
     console.log(error)
     res.status(500).json(error);
@@ -14,11 +14,10 @@ router.get("/", async (req,res) => {
 })
 
 router.get('/login', async (req, res) => {
+  let logged_in = false;
   try {
-    if (req.session.userId) {
+    if (logged_in) {
       res.redirect('/')
-    } else {
-      res.render('login')
     }
     res.render('login')
   } catch (error) {

@@ -16,10 +16,6 @@ User.init(
           len: [8],
         },
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
     },
 
 {
