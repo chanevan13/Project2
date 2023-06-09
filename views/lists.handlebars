@@ -1,17 +1,34 @@
-<div class="listTemplate">
+<script>
+  async function deleteList(id) {
+    await fetch(`/lists/${id}`, {method: "DELETE"});
+    location.reload();
+  }
+</script>
 
+<div class="listTemplate">
     <div class="Title">
-        Title 
-        {{listName}} 
+      Lists
     </div>
 
-    <div class="Items">
+    <div class="Lists">
         <ol>
-            {{#each allListItems}}
-                <li> {{listItem}} </li>
+            {{#each lists}}
+                <li><a href="/lists/{{this.id}}">{{this.listname}}</a> <br /> {{this.description}}</li>
+                <hr />
+                <button onclick="deleteList({{this.id}})">Delete</button>
             {{/each}}
         </ol>
     </div>
+    <form onsubmit="setTimeout(() => location.reload(), 100)"
+          action="/lists" method="POST">
+      <label for="listname">List Name:</label>
+      <input type="text" id="listname" name="listname" required>
+      <br><br>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+      <br><br>
+      <input type="submit" value="Create List">
+    </form>
 
 </div>
 
